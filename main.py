@@ -1,33 +1,33 @@
 from graphics import *
 
 
-def draw_grid(win, grid_rows, grid_columns, width, height):
+def grid(win, rows, columns, width, height):
     # Calculate width and height of the grid by taking the total width and height of the window and dividing it by the number of rows and colums
-    grid_width = width / grid_columns
-    grid_height = height / grid_rows
+    grid_width = width / columns
+    grid_height = height / rows
 
 
-    for i in range(grid_columns):
+    for i in range(columns):
         x = i * grid_width
         #Draws a bold line every 3 columns
         if i % 3 == 0 and i != 0:
-            bold_line = Line(Point(x, 0), Point(x, height))
+            bold_line = line(Point(x, 0), Point(x, height))
             bold_line.setWidth(3)
             bold_line.draw(win)
         else:
-            line = Line(Point(x, 0), Point(x, height))
+            line = line(Point(x, 0), Point(x, height))
             line.draw(win)
 
     # Drawing horizontal lines
-    for i in range(grid_rows):
+    for i in range(rows):
         y = i * grid_height
         # Draw bold lines every 3 rows
         if i % 3 == 0 and i != 0:
-            bold_line = Line(Point(0, y), Point(width, y))
+            bold_line = line(Point(0, y), Point(width, y))
             bold_line.setWidth(3)
             bold_line.draw(win)
         else:
-            line = Line(Point(0, y), Point(width, y))
+            line = line(Point(0, y), Point(width, y))
             line.draw(win)
 
 # Function to create text entry boxes
@@ -64,7 +64,7 @@ def ButtonCheck(win, text, command):
     button_rect = Rectangle(Point(120, 600), Point(420, 640))
     button_rect.setFill("grey")
     button_rect.draw(win)
-    button_text = Text(Point(270, 620), text)
+    button_text = text(Point(270, 620), text)
     button_text.draw(win)
     click_point = win.getMouse()
     x_click, y_click = click_point.getX(), click_point.getY()
@@ -80,7 +80,7 @@ def main():
     grid_rows = 9
     grid_columns = 9
 
-    draw_grid(win, grid_rows, grid_columns, win.getWidth(), 440)  # Draw the Sudoku grid
+    grid(win, grid_rows, grid_columns, win.getWidth(), 440)  # Draw the Sudoku grid
     textboxes(win, grid_rows, grid_columns, win.getWidth(), win.getHeight())  # Create text entry boxes
 
     # Create Quit button
@@ -96,3 +96,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
