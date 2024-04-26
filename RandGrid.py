@@ -25,16 +25,31 @@ def grid(win, rows, columns, width, height):
 
 #creates a number grid
 def num_grid(rows, columns, min_val, max_val, fill_percentage):
-    grid = []
+    grid = [[None] * columns for _ in range(rows)]  # Initialize an empty grid
+
+    def valid(row, col, value):
+        for i in range(9):
+            if grid[row][i] == value or grid[i][col] == value:
+                return False
+        start_row, start_column = 3 * (row // 3), 3 * (col // 3)
+        for i in range(start_row, start_row + 3):
+            for j in range(start_column, start_column + 3):
+                if grid[i][j] == value:
+                    return False
+        return True
+
     for row in range(rows):
-        row_list = []
-        for _ in range(columns):
+        for column in range(columns):
             if randint(1, 100) <= fill_percentage:
-                row_list.append(randint(min_val, max_val))
-            else:
-                row_list.append(None)
-        grid.append(row_list)
+                for value in range(min_val, max_val + 1):
+                    if valid(row, column, value):
+                        grid[row][column] = value
+                        break
+
     return grid
+
+
+
 
 # Function to create textboxes based on the grid
 def textboxes(win, grid, width, height):
@@ -85,14 +100,12 @@ def ButtonCheck(win, text, command):
 def main():
     difficulty = input("Choose a difficulty Easy, Medium, Hard: ")
     if difficulty == "Easy":
-        percentage = 40
+        percentage = 50
     elif difficulty == "Medium":
-        percentage = 25
+        percentage = 20
     elif difficulty == "Hard":
-        percentage = 15
-    else:
-        print("Enter Valid Difficulty")
-        input("Choose a difficulty Easy, Medium, Hard: ")
+        percentage = 10
+
 
     win = GraphWin("Sudoku", 640, 640)
     win.setBackground("white")
@@ -116,3 +129,4 @@ def main():
 
 if __name__:="__main__":
     main()
+
