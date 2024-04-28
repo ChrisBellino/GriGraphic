@@ -79,19 +79,6 @@ def ButtonQuit(win, text, command):
     if 320 <= x_click <= 420 and 600 <= 640:
         command()
 
-# check the solution of the Sudoku grid
-def check_solution(grid):
-    def is_valid(row, col, num):
-        for i in range(9):
-            if grid[row][i] == num or grid[i][col] == num:
-                return False
-        start_row, start_col = 3 * (row // 3), 3 * (col // 3)
-        for i in range(3):
-            for j in range(3):
-                if grid[i + start_row][j + start_col] == num:
-                    return False
-        return True
-
     for row in range(9):
         for col in range(9):
             if grid[row][col] is None:
