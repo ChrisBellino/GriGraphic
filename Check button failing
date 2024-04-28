@@ -79,14 +79,6 @@ def ButtonQuit(win, text, command):
     if 320 <= x_click <= 420 and 600 <= 640:
         command()
 
-    for row in range(9):
-        for col in range(9):
-            if grid[row][col] is None:
-                return False
-            if not is_valid(row, col, grid[row][col]):
-                return False
-    return True
-
 #"Check" button and validate the Sudoku solution
 
 def check_solution(grid):
@@ -120,7 +112,7 @@ def ButtonCheck(win, text, grid):
     x_click, y_click = click_point.getX(), click_point.getY()
 
     if 120 <= x_click <= 220 and 600 <= y_click <= 640:
-        if check_solution(grid):
+        if check_solution(grid):  # Use the check_solution function defined earlier
             msg = Text(Point(win.getWidth() / 2, win.getHeight() - 20), "Sudoku solution is correct!")
             msg.setTextColor("green")
             msg.draw(win)
@@ -128,6 +120,7 @@ def ButtonCheck(win, text, grid):
             msg = Text(Point(win.getWidth() / 2, win.getHeight() - 20), "Sudoku solution is incorrect!")
             msg.setTextColor("red")
             msg.draw(win)
+
 
 def main():
     difficulty = input("Choose a difficulty Easy, Medium, Hard: ")
@@ -150,3 +143,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
